@@ -1,7 +1,7 @@
 class Product{
   String nom;
   String description;
-  double prix;
+  num prix;
   String image;
   String categorie;
 
@@ -19,7 +19,7 @@ class Product{
   Product.fromJson(Map<String,dynamic> json)
     : nom = json["title"],
       description = json["description"],
-      prix = json["price"],
+      prix = json["price"] ,
       image = json["image"],
       categorie = json["category"];
 

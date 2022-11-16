@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'cart_page.dart';
+import 'detail_page.dart';
 
 void main() {
   runApp(EpsiShop());
@@ -25,6 +26,12 @@ class EpsiShop extends StatelessWidget {
               path: 'cart',
               builder: (BuildContext context, GoRouterState state) {
                 return CartPage();
+              },
+            ),
+            GoRoute(
+              path: 'detail',
+              builder: (BuildContext context, GoRouterState state) {
+                return DetailPage(state.extra as Product);
               },
             ),
             //GoRoute(
