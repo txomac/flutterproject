@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'product_model.dart';
 
@@ -20,7 +21,9 @@ class ListProductPage extends StatelessWidget {
           Stack(
             alignment: Alignment.center,
             children: [
-              IconButton(onPressed: (){}, icon: const Icon(Icons.shopping_cart)),
+              IconButton(onPressed: (){
+                context.go('/cart');
+              }, icon: const Icon(Icons.shopping_cart)),
               Positioned(
                 right: 8,
                 top: 8,
@@ -38,14 +41,21 @@ class ListProductPage extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-          itemCount:_lsProductsProduct.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(_lsProductsProduct[index].nom),
-            subtitle: Text(_lsProductsProduct[index].displayPriceInEuro()),
-            leading: Image.network(_lsProductsProduct[index].image),
-            trailing: TextButton(child: const Text("Add"),onPressed: (){},),
-          )
+      body: Column(
+        children: [
+          ListView.builder(
+              itemCount:_lsProductsProduct.length,
+              itemBuilder: (context, index) => ListTile(
+                title: Text(_lsProductsProduct[index].nom),
+                subtitle: Text(_lsProductsProduct[index].displayPriceInEuro()),
+                leading: Image.network(_lsProductsProduct[index].image),
+                trailing: TextButton(child: const Text("Add"),onPressed: (){},),
+              )
+          ),
+          //TODO Faire un future builder de la liste de produits
+          //TODO
+          //FutureBuilder(builder: builder)
+        ],
       ),
     );
   }
