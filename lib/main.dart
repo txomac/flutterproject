@@ -52,7 +52,7 @@ class EpsiShop extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Epsi Shop",
       theme: ThemeData(
-        primaryColor: Colors.amber
+        primaryColor: Colors.amber,
       ),
       //home: CartPage(),
       routerConfig: _router,
