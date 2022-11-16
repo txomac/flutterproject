@@ -17,8 +17,8 @@ class EpsiShop extends StatelessWidget {
         GoRoute(
             path: '/',
             builder: (BuildContext context, GoRouterState state) {
-              //return ListProductPage();
-              return RequestDogsFactsPages();
+              return ListProductPage();
+              //return RequestDogsFactsPages();
             },
           routes: [
             GoRoute(

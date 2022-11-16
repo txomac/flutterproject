@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 import 'product_model.dart';
 
@@ -43,17 +44,30 @@ class ListProductPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          ListView.builder(
-              itemCount:_lsProductsProduct.length,
-              itemBuilder: (context, index) => ListTile(
-                title: Text(_lsProductsProduct[index].nom),
-                subtitle: Text(_lsProductsProduct[index].displayPriceInEuro()),
-                leading: Image.network(_lsProductsProduct[index].image),
-                trailing: TextButton(child: const Text("Add"),onPressed: (){},),
-              )
+          Expanded(
+            child: ListView.builder(
+                itemCount:_lsProductsProduct.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(_lsProductsProduct[index].nom),
+                  subtitle: Text(_lsProductsProduct[index].displayPriceInEuro()),
+                  leading: Image.network(_lsProductsProduct[index].image),
+                  trailing: TextButton(child: const Text("Add"),onPressed: (){},),
+                )
+            ),
           ),
           //TODO Faire un future builder de la liste de produits
-          //TODO
+          FutureBuilder<http.Response>(
+              future: http.get(Uri.parse("https://fakestoreapi.com/products")),
+              builder: (context, snapshot) {
+                if(snapshot.hasData /*&& snapshot.data != null*/){
+                  return Text(snapshot.data?.body ?? "Pas de donnée :(");
+                }else if (snapshot.hasError){
+                  return Text("Impossible de récupérer des infos :(");
+                }else if(snapshot.connectionState == ConnectionState.waiting){
+                  return CircularProgressIndicator();
+                }else return Container();
+              }
+          ),
           //FutureBuilder(builder: builder)
         ],
       ),
