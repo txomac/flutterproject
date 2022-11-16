@@ -3,16 +3,23 @@ import 'package:epsi_shop/product_model.dart';
 import 'package:epsi_shop/request_dogs_facts.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
+import 'cart_model.dart';
 import 'cart_page.dart';
 import 'detail_page.dart';
 
 void main() {
-  runApp(EpsiShop());
+  runApp(
+      ChangeNotifierProvider<CartModel>(
+        create: (context) => CartModel(),
+        child: EpsiShop(),
+      )
+  );
 }
 
 class EpsiShop extends StatelessWidget {
-   EpsiShop({Key? key}) : super(key: key);
+  EpsiShop({Key? key}) : super(key: key);
   final _router = GoRouter(
       routes: [
         GoRoute(
@@ -21,26 +28,26 @@ class EpsiShop extends StatelessWidget {
               return ListProductPage();
               //return RequestDogsFactsPages();
             },
-          routes: [
-            GoRoute(
-              path: 'cart',
-              builder: (BuildContext context, GoRouterState state) {
-                return CartPage();
-              },
-            ),
-            GoRoute(
-              path: 'detail',
-              builder: (BuildContext context, GoRouterState state) {
-                return DetailPage(state.extra as Product);
-              },
-            ),
-            //GoRoute(
-            //  path: 'detail',
-            //  builder: (BuildContext context, GoRouterState state) {
-            //    return DetailPage();
-            //  },
-            //)
-          ]
+            routes: [
+              GoRoute(
+                path: 'cart',
+                builder: (BuildContext context, GoRouterState state) {
+                  return CartPage();
+                },
+              ),
+              GoRoute(
+                path: 'detail',
+                builder: (BuildContext context, GoRouterState state) {
+                  return DetailPage(state.extra as Product);
+                },
+              ),
+              //GoRoute(
+              //  path: 'detail',
+              //  builder: (BuildContext context, GoRouterState state) {
+              //    return DetailPage();
+              //  },
+              //)
+            ]
 
         ),
       ]

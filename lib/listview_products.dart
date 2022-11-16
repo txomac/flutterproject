@@ -2,6 +2,9 @@
 import 'package:epsi_shop/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+
+import 'cart_model.dart';
 
 class ListViewProducts extends StatelessWidget {
   const ListViewProducts({
@@ -26,7 +29,9 @@ class ListViewProducts extends StatelessWidget {
             child: Image.network(_lsProducts[index].image,
               width: 80,height: 80,),
           ),
-          trailing: TextButton(child: const Text("Add"),onPressed: (){},),
+          trailing: TextButton(child: const Text("Add"),onPressed: (){
+            context.read<CartModel>().add(_lsProducts[index]);
+          },),
         )
     );
   }

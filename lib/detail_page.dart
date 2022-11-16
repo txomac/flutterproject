@@ -42,9 +42,6 @@ class DetailPage extends StatelessWidget {
               ],),
 
             ),
-            MyCheckbox.Checkbox(),
-            Checkbox(value: value, onChanged: onChanged)
-
           ],
         ),
       ),
