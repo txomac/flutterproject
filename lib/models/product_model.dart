@@ -1,11 +1,13 @@
-class Product{
+class Product {
   String nom;
   String description;
   num prix;
   String image;
   String categorie;
+  num rating;
 
-  Product(this.nom, this.description, this.prix, this.image, this.categorie);
+  Product(this.nom, this.description, this.prix, this.image, this.categorie,
+      this.rating);
 
   //{
   // "id":1,
@@ -16,13 +18,21 @@ class Product{
   // "image":"https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
   // "rating":{"rate":3.9,"count":120}
   // }
-  Product.fromJson(Map<String,dynamic> json)
-    : nom = json["title"],
-      description = json["description"],
-      prix = json["price"] ,
-      image = json["image"],
-      categorie = json["category"];
-
+  Product.fromJson(Map<String, dynamic> json)
+      : nom = json["title"],
+        description = json["description"],
+        prix = json["price"],
+        image = json["image"],
+        categorie = json["category"],
+        rating = json["rating"]["rate"];
 
   String displayPriceInEuro() => "$prix €";
+
+  double getRating() {
+    return rating.toDouble();
+  }
+
+  set setRating(num value) {
+    rating = value;
+  }
 }
